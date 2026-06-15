@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Blog</title>
+    <style>
+        :root {
+            --primary: #007bff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f8f9fa;
+            transition: all 0.4s;
+        }
+        body.dark {
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        body.dark header {
+            background: #1a1a1a;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        body.dark .nav-links a { color: #ddd; }
+
+        #theme-toggle {
+            padding: 10px 16px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        body.dark #theme-toggle {
+            background: #333;
+        }
+
+        /* Posts */
+        .post {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        body.dark .post {
+            background: #1a1a1a;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .post:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .post img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 1.8rem;
+        }
+        .post h2 {
+            margin-bottom: 0.6rem;
+            font-size: 1.6rem;
+        }
+        .meta {
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        body.dark .meta { color: #aaa; }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #ddd;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        body.dark footer {
+            background: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <h1>Meu Blog</h1>
+            <ul class="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Tecnologia</a></li>
+                <li><a href="#">Design</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+            <button id="theme-toggle">🌙</button>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 40px;" id="posts">
+        <!-- Posts serão inseridos pelo JavaScript -->
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Meu Blog - Todos os direitos reservados</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Feito com ❤️ para aprender desenvolvimento web</p>
+        </div>
+    </footer>
+
+    <script>
+        const posts = [
+            {
+                title: "Como criar um blog bonito do zero",
+                date: "15 de Junho de 2026",
+                image: "https://picsum.photos/id/1015/800/400",
+                content: "Aprenda passo a passo como construir um blog moderno usando apenas HTML, CSS e JavaScript."
+            },
+            {
+                title: "Por que o tema escuro é tão importante?",
+                date: "14 de Junho de 2026",
+                image: "https://picsum.photos/id/201/800/400",
+                content: "Entenda os benefícios do dark mode para saúde visual, acessibilidade e experiência do usuário."
+            },
+            {
+                title: "Dicas de organização de projetos",
+                date: "13 de Junho de 2026",
+                image: "https://picsum.photos/id/237/800/400",
+                content: "Como manter seu código limpo e organizado separando HTML, CSS e JavaScript."
+            },
+            {
+                title: "Primeiros passos com JavaScript",
+                date: "12 de Junho de 2026",
+                image: "https://picsum.photos/id/180/800/400",
+                content: "Guia prático para quem está começando a programar com JavaScript."
+            }
+        ];
+
+        function renderPosts() {
+            const container = document.getElementById('posts');
+            container.innerHTML = posts.map(post => `
+                <article class="post">
+                    <img src="${post.image}" alt="${post.title}">
+                    <div class="post-content">
+                        <h2>${post.title}</h2>
+                        <div class="meta">Publicado em ${post.date}</div>
+                        <p>${post.content}</p>
+                        <a href="#" class="btn">Ler artigo completo →</a>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Toggle Tema Escuro
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        });
+
+        // Renderizar posts
+        renderPosts();
+    </script>
+</body>
+</html>
